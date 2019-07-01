@@ -93,7 +93,7 @@ pub fn wgpu_create_webgl_instance(canvas: web_sys::HtmlCanvasElement) -> Instanc
 #[no_mangle]
 pub extern "C" fn wgpu_instance_create_surface_from_winit(
     instance_id: InstanceId,
-    window: &winit::Window,
+    window: &winit::window::Window,
 ) -> SurfaceId {
     let mut token = Token::root();
     let (instance_guard, mut token) = HUB.instances.read(&mut token);
