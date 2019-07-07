@@ -11,7 +11,7 @@ use crate::{
 use crate::{device::BIND_BUFFER_ALIGNMENT, DeviceId, SurfaceId};
 
 #[cfg(feature = "local")]
-use log::info;
+use log::{info, debug};
 #[cfg(feature = "remote")]
 use serde::{Deserialize, Serialize};
 
@@ -272,11 +272,14 @@ pub extern "C" fn wgpu_instance_get_adapter(
     let limits = adapter.physical_device.limits();
 
     info!("Adapter {:?}", adapter.info);
+    debug!("{:?}", limits);
 
+    #[cfg(not(target_arch = "wasm32"))]
     assert!(
         BIND_BUFFER_ALIGNMENT % limits.min_storage_buffer_offset_alignment == 0,
         "Adapter storage buffer offset alignment not compatible with WGPU"
     );
+
     assert!(
         BIND_BUFFER_ALIGNMENT % limits.min_uniform_buffer_offset_alignment == 0,
         "Adapter uniform buffer offset alignment not compatible with WGPU"
