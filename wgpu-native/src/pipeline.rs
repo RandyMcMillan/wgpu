@@ -5,6 +5,7 @@ use crate::{
     PipelineLayoutId,
     RawString,
     ShaderModuleId,
+    ByteArray,
 };
 
 use bitflags::bitflags;
@@ -212,8 +213,7 @@ pub struct VertexInputDescriptor {
 #[repr(C)]
 #[derive(Debug)]
 pub struct ShaderModuleDescriptor {
-    pub code: *const u32,
-    pub code_length: usize,
+    pub code: ByteArray,
 }
 
 #[repr(C)]

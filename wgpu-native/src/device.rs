@@ -1257,12 +1257,15 @@ pub fn device_create_shader_module(
     desc: &pipeline::ShaderModuleDescriptor,
     token: &mut Token<Root>,
 ) -> ShaderModule<back::Backend> {
-    let spv = unsafe { slice::from_raw_parts(desc.code, desc.code_length) };
     let (device_guard, _) = HUB.devices.read(token);
+
+    let spv = unsafe { slice::from_raw_parts(desc.code.bytes, desc.code.length) };
+    let spv = hal::read_spirv(std::io::Cursor::new(spv)).unwrap();
+
     let shader = unsafe {
         device_guard[device_id]
             .raw
-            .create_shader_module(spv)
+            .create_shader_module(&spv)
             .unwrap()
     };
 

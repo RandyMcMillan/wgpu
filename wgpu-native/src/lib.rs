@@ -1,4 +1,4 @@
-#[cfg(all(feature = "local", feature = "window-winit", not(target_arch = "wasm32")))]
+#[cfg(all(feature = "local", feature = "window-winit"))]
 pub extern crate winit;
 
 #[cfg(feature = "gfx-backend-dx11")]
@@ -13,12 +13,12 @@ extern crate gfx_backend_dx12 as back;
     feature = "gfx-backend-gl",
 )))]
 extern crate gfx_backend_empty as back;
+#[cfg(feature = "gfx-backend-gl")]
+extern crate gfx_backend_gl as back;
 #[cfg(feature = "gfx-backend-metal")]
 extern crate gfx_backend_metal as back;
 #[cfg(feature = "gfx-backend-vulkan")]
 extern crate gfx_backend_vulkan as back;
-#[cfg(feature = "gfx-backend-gl")]
-extern crate gfx_backend_gl as back;
 
 mod binding_model;
 mod command;
