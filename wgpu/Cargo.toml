@@ -15,7 +15,7 @@ iced_native = { version = "0.1.0", path = "../native" }
 iced_style = { version = "0.1.0-alpha", path = "../style" }
 wgpu = "0.4"
 glyph_brush = "0.6"
-wgpu_glyph = { version = "0.7", git = "https://github.com/hecrj/wgpu_glyph", branch = "fix/font-load-panic" }
+wgpu_glyph = { version = "0.7", git = "https://github.com/hecrj/wgpu_glyph", rev = "72bda25a4ca8a5dca609067f673d82dcb2d6f203" }
 raw-window-handle = "0.3"
 glam = "0.8"
 font-kit = "0.4"
